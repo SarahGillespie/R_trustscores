@@ -1,0 +1,17 @@
+---
+title: "Trust Score Functions in R"
+author: "Sarah Gillespie"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(eval = FALSE)
+
+```
+# Convert the stuff in python to be entirely in R.
+# this will be tough, especially since the python ML is done almost entirely
+# in longstanding python ML libraries.
+
+# for now, just create a way for the exisitng python functions to accept
+# R input and spit out R output.
