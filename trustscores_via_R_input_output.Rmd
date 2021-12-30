@@ -24,6 +24,7 @@ reticulate::py_config() # Double check that reticulate is actually using your ne
 reticulate::py_install("sklearn", pip = TRUE) # force install with pip. sklearn wasn't coming up via anaconda.
 reticulate::py_install("matplotlib")
 reticulate::py_install("keras")
+reticulate::py_install("pandas")
 
 # setting up the Python environment and bringing in the required Python packages is important.
 # It will probably take a little while so be patient and try to avoid accidentally running
@@ -42,6 +43,7 @@ import trustscore_evaluation  # you need to have trustscore_evaluation.py in the
 import numpy as np
 import matplotlib.pyplot as plt
 import keras
+import pandas as pd
 
 # heads up! there might be some scary errors about "dlerror: cudart64_110.dll not found". It's just a warning and you can ignore it.
 
@@ -83,15 +85,19 @@ y_penguins = penguins_target
 ```
 
 ```{python}
+# convert the imported datasets from python dictionaries to python floats
+
+# my_dict = penguins_target
+# df = pd.DataFrame(list(my_dict.items()),columns = ['species'])
+
+```
+
+```{python}
 # prep the model
 from sklearn.linear_model import LogisticRegression
 # Train logistic regression on digits.
 model = LogisticRegression()
 
-# convert the penguins data to be floats rather than a dictionary.
-# the R df appears to be imported asa dictionary with a collection of
-# 
-s=dict1.values()
 ```
 
 ```{python}
