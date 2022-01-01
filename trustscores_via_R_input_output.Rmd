@@ -58,7 +58,8 @@ library(palmerpenguins)
 library(dplyr)
 
 # data
-penguins_df <- penguins
+penguins_df <- penguins %>%
+    dplyr::filter(complete.cases(.)) # remove all lines with NaN
 
 # target: species
 # data: bill_length_mm, bil_depth_mm, flipper_length_mm, body_mass_g
@@ -102,12 +103,16 @@ model = LogisticRegression()
 
 ```{python}
 # implement the model
-model.fit(X_penguins, y_penguins)
+model.fit(X_penguins, y_penguins.values.ravel())
+# note: I added the ravel part to make y a 1d array and solve the below error:
+#" /Users/sgill/Library/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sklearn/utils/validation.py:63: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel()."
+
+
 # Get outputs on testing set.
 y_pred = model.predict(X_penguins)
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
-trust_model.fit(X_penguins, y_penguins)
+trust_model.fit(X_penguins, y_penguins.values.ravel()) # SARAH ERROR HERE
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
 
