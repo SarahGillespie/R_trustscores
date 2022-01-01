@@ -59,15 +59,14 @@ library(dplyr)
 
 # data
 penguins_df <- penguins %>%
-    dplyr::filter(complete.cases(.)) # remove all lines with NaN
+    dplyr::filter(complete.cases(.)) # remove all lines with NaN so the model can be fit on the data (later)
 
-# target: species
-# data: bill_length_mm, bil_depth_mm, flipper_length_mm, body_mass_g
 
 penguins_data <- penguins_df %>%
   # dplyr::select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
   dplyr::select(bill_length_mm)
 
+# target: species
 penguins_target <- penguins_df %>%
   dplyr::select(species)
   
@@ -83,14 +82,6 @@ penguins_target = r.penguins_target
 
 X_penguins = penguins_data
 y_penguins = penguins_target
-```
-
-```{python}
-# convert the imported datasets from python dictionaries to python floats
-
-# my_dict = penguins_target
-# df = pd.DataFrame(list(my_dict.items()),columns = ['species'])
-
 ```
 
 ```{python}
@@ -112,7 +103,11 @@ model.fit(X_penguins, y_penguins.values.ravel())
 y_pred = model.predict(X_penguins)
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
-trust_model.fit(X_penguins, y_penguins.values.ravel()) # SARAH ERROR HERE
+trust_model.fit(X_penguins, y_penguins.values.ravel())
+# SARAH: TypeError: must be str, not int --> seems to be referring to y_penguins
+
+
+
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
 
