@@ -99,14 +99,21 @@ model.fit(X_penguins, y_penguins.values.ravel())
 #" /Users/sgill/Library/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sklearn/utils/validation.py:63: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel()."
 
 
-# Get outputs on testing set.
+# Create outputs on testing set.
 y_pred = model.predict(X_penguins)
+
+```
+
+```{python}
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
 trust_model.fit(X_penguins, y_penguins.values.ravel())
 # SARAH: TypeError: must be str, not int --> seems to be referring to y_penguins
 
+```
 
+
+```{python}
 
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
