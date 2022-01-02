@@ -69,6 +69,8 @@ penguins_data <- penguins_df %>%
 # target: species
 penguins_target <- penguins_df %>%
   dplyr::select(species)
+
+# make each species into a categorical variable number
   
   
 ```
@@ -80,8 +82,25 @@ penguins_data = r.penguins_data
 
 penguins_target = r.penguins_target
 
+dictionary = {}
+current_index = 0
+
+def encode(value):
+    if value in dictionary:
+      return dictionary[value]
+    else:
+      global current_index
+      
+      new_index = current_index
+      dictionary[value] = new_index
+      current_index = current_index + 1
+      
+      return new_index
+
 X_penguins = penguins_data
-y_penguins = penguins_target
+y_penguins = list(map(encode, penguins_target.values.ravel()))
+
+print(dictionary)
 ```
 
 ```{python}
@@ -94,7 +113,7 @@ model = LogisticRegression()
 
 ```{python}
 # implement the model
-model.fit(X_penguins, y_penguins.values.ravel())
+model.fit(X_penguins, y_penguins)
 # note: I added the ravel part to make y a 1d array and solve the below error:
 #" /Users/sgill/Library/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sklearn/utils/validation.py:63: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel()."
 
@@ -104,14 +123,18 @@ y_pred = model.predict(X_penguins)
 
 ```
 
-```{python}
+```{python echo=TRUE}
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
-trust_model.fit(X_penguins, y_penguins.values.ravel())
+
+trust_model.fit(X_penguins, y_penguins)
 # SARAH: TypeError: must be str, not int --> seems to be referring to y_penguins
 
 ```
 
+```{r}
+py_last_error()
+```
 
 ```{python}
 
