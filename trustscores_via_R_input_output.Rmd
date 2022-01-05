@@ -82,6 +82,8 @@ penguins_data = r.penguins_data
 
 penguins_target = r.penguins_target
 
+# encode each penguin species to be a number.
+# purpose: make it easier for the model to assign a species and a trust score to the species prediction.
 dictionary = {}
 current_index = 0
 
@@ -100,12 +102,13 @@ def encode(value):
 X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 
-print(dictionary)
+print(dicti # dictionary if each penguin sepecies with its corresponding number
 ```
 
 ```{python}
 # prep the model
 from sklearn.linear_model import LogisticRegression
+
 # Train logistic regression on digits.
 model = LogisticRegression()
 
@@ -114,9 +117,6 @@ model = LogisticRegression()
 ```{python}
 # implement the model
 model.fit(X_penguins, y_penguins)
-# note: I added the ravel part to make y a 1d array and solve the below error:
-#" /Users/sgill/Library/r-miniconda/envs/r-reticulate/lib/python3.6/site-packages/sklearn/utils/validation.py:63: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel()."
-
 
 # Create outputs on testing set.
 y_pred = model.predict(X_penguins)
@@ -128,7 +128,7 @@ y_pred = model.predict(X_penguins)
 trust_model = trustscore.TrustScore()
 
 trust_model.fit(X_penguins, y_penguins)
-# SARAH: TypeError: must be str, not int --> seems to be referring to y_penguins
+# SARAH: ValueError: at least one array or dtype is required
 
 ```
 

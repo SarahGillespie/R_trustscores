@@ -5,3 +5,5 @@
 .DS_Store
 .DS_Store
 __pycache__/trustscore.cpython-36.pyc
+.Rhistory
+*.pyc
