@@ -102,7 +102,7 @@ def encode(value):
 X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 
-print(dicti # dictionary if each penguin sepecies with its corresponding number
+print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
 ```
 
 ```{python}
@@ -129,6 +129,13 @@ trust_model = trustscore.TrustScore()
 
 trust_model.fit(X_penguins, y_penguins)
 # SARAH: ValueError: at least one array or dtype is required
+
+# >>> type(X_penguins)
+# <class 'pandas.core.frame.DataFrame'>
+# >>> type(y_penguins)
+# <class 'list'>
+
+
 
 ```
 
