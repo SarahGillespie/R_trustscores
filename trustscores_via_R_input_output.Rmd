@@ -102,6 +102,12 @@ def encode(value):
 X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 
+# convert y_penguins from a list to a df
+# List1 
+lst = [y_penguins] 
+df = pd.DataFrame(lst, dtype = float).transpose() 
+y_penguins = df
+
 print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
 ```
 
@@ -128,14 +134,25 @@ y_pred = model.predict(X_penguins)
 trust_model = trustscore.TrustScore()
 
 trust_model.fit(X_penguins, y_penguins)
-# SARAH: ValueError: at least one array or dtype is required
+# SARAH: TypeError: Cannot broadcast np.ndarray with operand of type <class 'list'>
 
-# >>> type(X_penguins)
-# <class 'pandas.core.frame.DataFrame'>
-# >>> type(y_penguins)
-# <class 'list'>
+# Error soure: trustscore.py line 80
+#     def fit(self, X: np.array, y: np.array):
+#         """Initialize trust score precomputations with training data.
+# 
+#     WARNING: assumes that the labels are 0-indexed (i.e.
+#     0, 1,..., n_labels-1).
+# 
+#     Args:
+#     X: an array of sample points.
+#     y: corresponding labels.
+#     """
 
+# so...
+# the x argument needs to be an array ---> not a df??
+# the y argument needs to be "corresponding labels" but the doc string does not provide a specific data structure.
 
+# to do: convert X_penguins from 'pandas.core.frame.DataFrame' to an array.
 
 ```
 
