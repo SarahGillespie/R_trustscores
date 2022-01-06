@@ -102,12 +102,6 @@ def encode(value):
 X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 
-# convert y_penguins from a list to a df
-# List1 
-lst = [y_penguins] 
-df = pd.DataFrame(lst, dtype = float).transpose() 
-y_penguins = df
-
 print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
 ```
 
@@ -132,7 +126,7 @@ y_pred = model.predict(X_penguins)
 ```{python echo=TRUE}
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
-
+X_penguins = X_penguins.to_numpy()
 trust_model.fit(X_penguins, y_penguins)
 # SARAH: TypeError: Cannot broadcast np.ndarray with operand of type <class 'list'>
 
@@ -152,8 +146,9 @@ trust_model.fit(X_penguins, y_penguins)
 # the x argument needs to be an array ---> not a df??
 # the y argument needs to be "corresponding labels" but the doc string does not provide a specific data structure.
 
-# to do: convert X_penguins from 'pandas.core.frame.DataFrame' to an array.
+# to do: convert X_penguins from 'pandas.core.frame.DataFrame' to an array. perhaps a numpy array?
 
+# newest error: ValueError: Found array with 0 sample(s) (shape=(0, 1)) while a minimum of 1 is required.
 ```
 
 ```{r}
