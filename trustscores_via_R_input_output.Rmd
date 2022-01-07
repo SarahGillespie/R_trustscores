@@ -63,8 +63,7 @@ penguins_df <- penguins %>%
 
 
 penguins_data <- penguins_df %>%
-  # dplyr::select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
-  dplyr::select(bill_length_mm)
+  dplyr::select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
 
 # target: species
 penguins_target <- penguins_df %>%
@@ -127,11 +126,10 @@ y_pred = model.predict(X_penguins)
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
 X_penguins = X_penguins.to_numpy()
+# y_penguins = y_penguins.to_numpy()
 trust_model.fit(X_penguins, y_penguins)
 
-# SARAH: TypeError: Cannot broadcast np.ndarray with operand of type <class 'list'>
-
-# Error soure: trustscore.py line 80
+# Efunction needs:
 #     def fit(self, X: np.array, y: np.array):
 #         """Initialize trust score precomputations with training data.
 # 
@@ -144,12 +142,12 @@ trust_model.fit(X_penguins, y_penguins)
 #     """
 
 # so...
-# the x argument needs to be an array ---> not a df??
-# the y argument needs to be "corresponding labels" but the doc string does not provide a specific data structure.
 
-# to do: convert X_penguins from 'pandas.core.frame.DataFrame' to an array. perhaps a numpy array?
+# newest error: ValueError: Found array with 0 sample(s) (shape=(0, 4)) while a minimum of 1 is required.
+# so this array us a problem with the samples. the 4 in the shape is the number of columns.
+# where did the samples go?
 
-# newest error: ValueError: Found array with 0 sample(s) (shape=(0, 1)) while a minimum of 1 is required.
+# also, y_penguins: AttributeError: 'list' object has no attribute 'to_numpy' ... b/c already an array. this probably could be its own code chunk or even at the begining when importing the data.
 ```
 
 ```{r}

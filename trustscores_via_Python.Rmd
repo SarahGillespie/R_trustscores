@@ -69,12 +69,12 @@ from sklearn.linear_model import LogisticRegression
 model = LogisticRegression()
 model.fit(X_wine, y_wine)
 # Get outputs on testing set.
-y_pred = model.predict(X_digits)
+y_pred = model.predict(X_wine)
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
 trust_model.fit(X_wine, y_wine)
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
-trust_score = trust_model.get_score(X_digits, y_pred)
+trust_score = trust_model.get_score(X_wine, y_pred)
 
 print(trust_score) # prints the trust scores for each point in the inputted dataset
 
