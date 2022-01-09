@@ -169,6 +169,4 @@ print(trust_score) # prints the trust scores for each point in the inputted data
 Trust Scores functions from the Google Scholars paper: https://github.com/google/TrustScore
 To Trust Or Not To Trust A Classifier paper by Heinrich Jiang, Been Kim, Melody Y. Guan, Maya Gupta: https://arxiv.org/abs/1805.11783
 Reticulate documentation: https://rstudio.github.io/reticulate/
-Stack Overflow failed to converge error answer, by 
-Yahya and Peter Mortensen: https://stackoverflow.com/a/62659927
 
