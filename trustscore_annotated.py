@@ -1,7 +1,7 @@
 ###############################################################################
-# Copyright 2018 Google LLC
+# Copyright 2018 Google LLC                                                   #
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License");             #
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -82,25 +82,37 @@ class TrustScore:
 
     Args:
     X: an array of sample points.
-    y: corresponding labels.
+    y: corresponding labels. # as a nupy array! - Sarah Gillespie
     """
     
-    # this function appears to use numpy arrays as its inputted data structure.
+    # the y MUST be a numpy array. Convert it with np.array(y_penguins)
+    #    - Sarah Gillespie
+    
+    
+    # this function to uses numpy arrays as its inputted data structure for both the x and y inputs.
+    #    - Sarah Gillespie
+        
         self.n_labels = np.max(y) + 1
+        
         # self.n_labels is defined as:
         # the number of rows in the target numpy array plus 1
         # should be an integer
+        #    - Sarah Gillespie
         
         self.kdtrees = [None] * self.n_labels
         # [None] is a list with a "None" object in it,
         # of type "NoneType".
         # from this StackOverflow explanation:
         # https://stackoverflow.com/questions/36928602/what-is-difference-between-none-and-in-python
+        #    - Sarah Gillespie
+        
         
         # kdtrees is a list of many None objects.
         # if kdtrees was 5, then kdtrees = [None] * 5
         # which would calculate to be kdtrees = [None, None, None, None, None]
-        
+        #    - Sarah Gillespie
+                
+                
         if self.filtering == "uncertainty":
             X_filtered, y_filtered = self.filter_by_uncertainty(X, y)
         for label in range(self.n_labels):
@@ -135,8 +147,8 @@ class TrustScore:
     """
     
     # the X argument should be a numpy array
-    # the y argument is not specified here. The example code had y_pred be...
-    # SARAH ADD IN THE EXACT DATA STRUCTURE OF y_pred
+    # the y argument is not specified here. The example code had y_pred be a numpy array.
+    #    - Sarah Gillespie
     
         d = np.tile(None, (X.shape[0], self.n_labels))
         for label_idx in range(self.n_labels):
