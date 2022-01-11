@@ -45,12 +45,10 @@ import matplotlib.pyplot as plt
 import keras
 import pandas as pd
 
-# heads up! there might be some scary errors about "dlerror: cudart64_110.dll not found". It's just a warning and you can ignore it.
+# heads up! there might be some scary errors about "dlerror: cudart64_110.dll not found".
+# It's just a warning and you can ignore it.
 
 ```
-
-
-# new input: an R dataset
 
 ```{r}
 
@@ -59,7 +57,8 @@ library(dplyr)
 
 # data
 penguins_df <- penguins %>%
-    dplyr::filter(complete.cases(.)) # remove all lines with NaN so the model can be fit on the data (later)
+    dplyr::filter(complete.cases(.)) 
+# remove all lines with NaN and N/A so the model can be fit on the data
 
 
 penguins_data <- penguins_df %>%
@@ -100,12 +99,8 @@ def encode(value):
 
 X_penguins = penguins_data
 
-# SARAH SOLVE: UNNEST ALL OF THESE
-# is it the .ravel() or the map or the list?
 y_penguins = list(map(encode, penguins_target.values.ravel()))
-
-
-# need to unravel it after?
+# at this point y_penguins is a list. We will need to make it a numpy array later.
 
 print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
 ```
@@ -126,6 +121,12 @@ model.fit(X_penguins, y_penguins)
 # Create outputs on testing set.
 y_pred = model.predict(X_penguins)
 
+
+# You may get a "failed to converge" and "max number of interations reached" warning.
+# this is more about the data not fitting well to the assigned model rather than a tech issue.
+# sarah add mire details about what this means from an ML perspective.
+
+
 ```
 
 ```{python echo=TRUE}
@@ -135,7 +136,8 @@ X_penguins = X_penguins.to_numpy()
 y_penguins = np.array(y_penguins)
 trust_model.fit(X_penguins, y_penguins)
 
-# Efunction needs:
+# The function:
+
 #     def fit(self, X: np.array, y: np.array):
 #         """Initialize trust score precomputations with training data.
 # 
@@ -161,20 +163,21 @@ trust_model.fit(X_penguins, y_penguins)
 
 ```
 
-```{r}
-py_last_error()
-```
 
 ```{python}
 
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
 
-print(trust_score) # prints the trust scores for each point in the inputted dataset
-
-# type(trust_score) # this trust_score data frame has a class of <class 'numpy.ndarray'>
+print(trust_score) # prints the trust scores for each point in the inputted data set
 
 ```
+
+```{r}
+# use this code to trace back the last error. Errors are solved now, so this is not needed.
+# py_last_error()
+```
+
 
 ### Resources
 Trust Scores functions from the Google Scholars paper: https://github.com/google/TrustScore
