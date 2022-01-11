@@ -99,7 +99,13 @@ def encode(value):
       return new_index
 
 X_penguins = penguins_data
+
+# SARAH SOLVE: UNNEST ALL OF THESE
+# is it the .ravel() or the map or the list?
 y_penguins = list(map(encode, penguins_target.values.ravel()))
+
+
+# need to unravel it after?
 
 print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
 ```
@@ -126,7 +132,7 @@ y_pred = model.predict(X_penguins)
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
 X_penguins = X_penguins.to_numpy()
-# y_penguins = y_penguins.to_numpy()
+y_penguins = np.array(y_penguins)
 trust_model.fit(X_penguins, y_penguins)
 
 # Efunction needs:
@@ -146,8 +152,13 @@ trust_model.fit(X_penguins, y_penguins)
 # newest error: ValueError: Found array with 0 sample(s) (shape=(0, 4)) while a minimum of 1 is required.
 # so this array us a problem with the samples. the 4 in the shape is the number of columns.
 # where did the samples go?
+# np.shape(y_penguins)
+# (333,)
+# --> PROBLEM PROBLEM PROBLEM!
+# needs to be 333,1
 
 # also, y_penguins: AttributeError: 'list' object has no attribute 'to_numpy' ... b/c already an array. this probably could be its own code chunk or even at the begining when importing the data.
+
 ```
 
 ```{r}
