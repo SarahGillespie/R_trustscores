@@ -7,6 +7,8 @@ This repository expands on *Google/TrustScore: To trust or not to trust a classi
 Much of this repository is based on To Trust Or Not To Trust A Classifier's concepts and code. All references are cited below.
 
 References:
+
+
 Jiang, H., & Hembise, C. (n.d.). *Google/TrustScore: To trust or not to trust a classifier. A measure of uncertainty for any trained (possibly Black-box) classifier which is more effective than the classifier's own implied confidence (e.g. softmax probability for a neural network)*. GitHub. Retrieved December 22, 2021, from https://github.com/google/TrustScore
 
 Jiang, H., Kim, B., Guan, M. Y., & Gupta, M. (2018, October 26). *To trust or not to trust a classifier*. arXiv.org. Retrieved December 22, 2021, from https://arxiv.org/abs/1805.11783 
