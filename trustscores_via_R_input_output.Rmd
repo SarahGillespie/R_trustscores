@@ -30,8 +30,8 @@ reticulate::py_install("keras")
 reticulate::py_install("pandas")
 
 # setting up the Python environment and bringing in the required Python packages is important.
-# It will probably take a little while so be patient and try to avoid accidentally running
-# this chunk of code.
+# Running this code will likely take 5 to 10 minutes if you do not already have
+# these python packages installed. Otherwise, 
 
 # common trouble shooting:
 # if you're missing a package then try adding its name in an additonal line of py_install
