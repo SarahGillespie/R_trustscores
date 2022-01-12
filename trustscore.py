@@ -73,8 +73,9 @@ class TrustScore:
 
     Args:
     X: an array of sample points.
-    y: corresponding labels.
+    y: corresponding labels. # as an array!
     """
+    
 
         self.n_labels = np.max(y) + 1
         self.kdtrees = [None] * self.n_labels

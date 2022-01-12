@@ -34,12 +34,16 @@ reticulate::py_install("pandas")
 # this chunk of code.
 
 # common trouble shooting:
-# if you're missing a package then try adding its name in an additonal line of py_install
+# if you're missing a package then try adding its name in an additional line of py_install
 # if py_install isn't working then try adding the pip = TRUE argument to try installing
 # the library through pip rather than anaconda
 ```
 
 ```{python}
+# import python packages
+# this brings in packages that you installed onto your computer into the R 
+# environment to be able to adequately run Python within R Studio.
+
 import numpy as np
 import trustscore # you need to have trustscore.py in the same folder as this .Rmd file to import it
 import trustscore_evaluation  # you need to have trustscore_evaluation.py in the same folder as this .Rmd file to import it
@@ -55,25 +59,25 @@ import pandas as pd
 
 ```{r}
 
-# data
+# data wrangling
+# remove all lines with NaN and N/A so the model can be fit on the data
 penguins_df <- penguins %>%
     dplyr::filter(complete.cases(.)) 
-# remove all lines with NaN and N/A
-# so the model can fit the data
 
+# choose the data columns to use in the model
 penguins_data <- penguins_df %>%
   dplyr::select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
 
-# target: species
+# prediction target: species
 penguins_target <- penguins_df %>%
   dplyr::select(species)
-  
-  
+
 ```
 
 
 ```{python}
-# Import penguins from R into python
+
+# Import penguins from R into Python
 penguins_data = r.penguins_data
 
 penguins_target = r.penguins_target
@@ -100,25 +104,27 @@ X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 # at this point y_penguins is a list. We will need to make it a numpy array later.
 
-print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
+print(dictionary) # dictionary with each penguin species connected to its assigned number
 ```
 
 ```{python}
-# prep the model
+# bring in  Python machine learning library scikit-learn, abbreviated as sklearn
+
+# select the specifc model
 from sklearn.linear_model import LogisticRegression
 
-# Train logistic regression on digits.
+# assign your chosen model to the general model variable
 model = LogisticRegression()
 
 ```
 
 ```{python}
+
 # implement the model
 model.fit(X_penguins, y_penguins)
 
-# Create outputs on testing set.
+# generate predictions
 y_pred = model.predict(X_penguins)
-
 
 # You may get a "failed to converge" and "max number of interations reached" warning.
 # this is more about the data not fitting well to the assigned model rather than a tech issue.
@@ -127,44 +133,23 @@ y_pred = model.predict(X_penguins)
 
 ```
 
-```{python echo=TRUE}
-# Initialize trust score.
+```{python}
+# Initialize trust score from the trustscore.py file
 trust_model = trustscore.TrustScore()
-X_penguins = X_penguins.to_numpy()
+
+# have the x and y inputs be converted to numpy arrays
+X_penguins = np.array(X_penguins)
 y_penguins = np.array(y_penguins)
+
+# fit the trust scores to the model
 trust_model.fit(X_penguins, y_penguins)
-
-# The function:
-
-#     def fit(self, X: np.array, y: np.array):
-#         """Initialize trust score precomputations with training data.
-# 
-#     WARNING: assumes that the labels are 0-indexed (i.e.
-#     0, 1,..., n_labels-1).
-# 
-#     Args:
-#     X: an array of sample points.
-#     y: corresponding labels.
-#     """
-
-# so...
-
-# newest error: ValueError: Found array with 0 sample(s) (shape=(0, 4)) while a minimum of 1 is required.
-# so this array us a problem with the samples. the 4 in the shape is the number of columns.
-# where did the samples go?
-# np.shape(y_penguins)
-# (333,)
-# --> PROBLEM PROBLEM PROBLEM!
-# needs to be 333,1
-
-# also, y_penguins: AttributeError: 'list' object has no attribute 'to_numpy' ... b/c already an array. this probably could be its own code chunk or even at the begining when importing the data.
 
 ```
 
 
 ```{python}
-
-# Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
+# Compute the trusts score
+# provide the model with (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
 
 print(trust_score) # prints the trust scores for each point in the inputted data set
