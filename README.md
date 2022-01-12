@@ -1,6 +1,6 @@
 # Trust Scores in R
 
-*Create ethical and explainable machine learning algorithms through the closest thing machine learning has to a p-value right now.*
+*Create ethical and explainable machine learning algorithms through the closest thing machine learning outputs have to a p-value right now.*
 
 This repository expands on *Google/TrustScore: To trust or not to trust a classifier. A measure of uncertainty for any trained (possibly Black-box) classifier which is more effective than the classifier's own implied confidence (e.g. softmax probability for a neural network)* by adding comments to their base python code, trustscores.py, and providing the necesssary code to find trust scores in R using a package that converts the exisitng Python code to R. 
 
