@@ -1,12 +1,12 @@
-# Trust Scores in R
+### Trust Scores in R
 
-## *Create ethical and explainable machine learning algorithms through the closest thing machine learning outputs have to a p-value right now.*
+##### *Create ethical and explainable machine learning algorithms through the closest thing machine learning outputs have to a p-value right now.*
 
 This repository expands on *Google/TrustScore: To trust or not to trust a classifier. A measure of uncertainty for any trained (possibly Black-box) classifier which is more effective than the classifier's own implied confidence (e.g. softmax probability for a neural network)* by adding comments to their base python code, trustscores.py, and providing the necesssary code to find trust scores in R using a package that converts the exisitng Python code to R. 
 
 Much of this repository is based on To Trust Or Not To Trust A Classifier's concepts and code. All references are cited below.
 
-## References:
+#### References:
 
 
 Jiang, H., & Hembise, C. (n.d.). *Google/TrustScore: To trust or not to trust a classifier. A measure of uncertainty for any trained (possibly Black-box) classifier which is more effective than the classifier's own implied confidence (e.g. softmax probability for a neural network)*. GitHub. Retrieved December 22, 2021, from https://github.com/google/TrustScore
@@ -22,7 +22,8 @@ Interface to python. Interface to Python • reticulate. (n.d.). Retrieved Decem
 Yahya, & Mortensen, P. (2021, May 8). *Convergencewarning: Lbfgs failed to converge (status=1): Stop: Total no. of iterations reached limit*. Stack Overflow. Retrieved December 22, 2021, from https://stackoverflow.com/a/62659927
 
 
-## License:
+#### License:
+
 This teachable unit is created from the references listed above, as well as my own work. It is offered under the Apache Licence.
 
 Copyright 2021 Sarah Gillespie
