@@ -103,12 +103,12 @@ y_penguins = list(map(encode, penguins_target.values.ravel()))
 print(dictionary) # dictionary with each penguin species connected to its assigned number
 ```
 
-# Logistic Regression
+## Logistic Regression
 ```{python logistic regression model}
 
 # NOTE: you may want to run each of these one line at a time in the console.
 
-# prep the model
+# import the model
 from sklearn.linear_model import LogisticRegression
 
 # Train logistic regression on digits.
@@ -146,11 +146,12 @@ print(trust_score)
 
 ```
 
-
-
+Other models to try:
+from sklearn.svm import LinearSVC
+from sklearn.ensemble import RandomForestClassifier
 
 ```{r}
-# use this code to trace back the last error. Errors are solved now, so this is not needed.
+# use this code to trace back the last error, if needed.
 # py_last_error()
 ```
 
