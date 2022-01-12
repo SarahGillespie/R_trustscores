@@ -57,10 +57,9 @@ import pandas as pd
 
 # data
 penguins_df <- penguins %>%
-    dplyr::filter(complete.cases(.)) 
-# remove all lines with NaN and N/A
-# so the model can fit the data
-
+    dplyr::filter(complete.cases(.))
+# remove all lines with missing values so the model can fit the data
+ 
 penguins_data <- penguins_df %>%
   dplyr::select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
 
@@ -78,8 +77,9 @@ penguins_data = r.penguins_data
 
 penguins_target = r.penguins_target
 
-# encode each penguin species to be a number.
-# purpose: make it easier for the model to assign a species and a trust score to the species prediction.
+# python function: encode each penguin species to be a number.
+# purpose: make it easier for the model to assign a species prediction and its trust score
+
 dictionary = {}
 current_index = 0
 
@@ -100,7 +100,7 @@ X_penguins = penguins_data
 y_penguins = list(map(encode, penguins_target.values.ravel()))
 # at this point y_penguins is a list. We will need to make it a numpy array later.
 
-print(dictionary) # dictionary with each penguin sepecies connected to its assigned number
+print(dictionary) # dictionary with each penguin species connected to its assigned number
 ```
 
 ```{python}
@@ -119,46 +119,24 @@ model.fit(X_penguins, y_penguins)
 # Create outputs on testing set.
 y_pred = model.predict(X_penguins)
 
-
-# You may get a "failed to converge" and "max number of interations reached" warning.
+# You may get a "failed to converge" and "max number of iterations reached" warning
 # this is more about the data not fitting well to the assigned model rather than a tech issue.
-# sarah add mire details about what this means from an ML perspective.
-
+# it can safely be ignored.
 
 ```
 
 ```{python echo=TRUE}
 # Initialize trust score.
 trust_model = trustscore.TrustScore()
+
+# convert the inputs into numpy arrays
 X_penguins = X_penguins.to_numpy()
 y_penguins = np.array(y_penguins)
+
+# fit the model
 trust_model.fit(X_penguins, y_penguins)
 
-# The function:
-
-#     def fit(self, X: np.array, y: np.array):
-#         """Initialize trust score precomputations with training data.
-# 
-#     WARNING: assumes that the labels are 0-indexed (i.e.
-#     0, 1,..., n_labels-1).
-# 
-#     Args:
-#     X: an array of sample points.
-#     y: corresponding labels.
-#     """
-
-# so...
-
-# newest error: ValueError: Found array with 0 sample(s) (shape=(0, 4)) while a minimum of 1 is required.
-# so this array us a problem with the samples. the 4 in the shape is the number of columns.
-# where did the samples go?
-# np.shape(y_penguins)
-# (333,)
-# --> PROBLEM PROBLEM PROBLEM!
-# needs to be 333,1
-
-# also, y_penguins: AttributeError: 'list' object has no attribute 'to_numpy' ... b/c already an array. this probably could be its own code chunk or even at the begining when importing the data.
-
+# the model will be fitted. No output.
 ```
 
 
@@ -167,7 +145,8 @@ trust_model.fit(X_penguins, y_penguins)
 # Compute trusts score, given (unlabeled) testing examples and (hard) model predictions.
 trust_score = trust_model.get_score(X_penguins, y_pred)
 
-print(trust_score) # prints the trust scores for each point in the inputted data set
+# prints the trust scores for each point in the inputted data set
+print(trust_score)
 
 ```
 
