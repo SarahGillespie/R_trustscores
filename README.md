@@ -20,7 +20,7 @@ Interface to python. Interface to Python • reticulate. (n.d.). Retrieved Decem
 Yahya, & Mortensen, P. (2021, May 8). *Convergencewarning: Lbfgs failed to converge (status=1): Stop: Total no. of iterations reached limit*. Stack Overflow. Retrieved December 22, 2021, from https://stackoverflow.com/a/62659927
 
 
-Licensce:
+license:
 This teachable unit is created from the references listed above, as well as my own work. It is offered under the Apache Licence.
 
 Copyright 2021 Sarah Gillespie
