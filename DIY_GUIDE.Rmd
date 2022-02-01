@@ -17,7 +17,7 @@ While the initial trust score code was done in Python 2.7, it was updated to be 
 
 
 #### Step 1: Gather materials.
-Download the entire repository. It is important to have the trustscores.py anf trustscore_evaluation.py in the same folder as the .Rmd file to import the trust score functions that are in that Python file.
+Download the entire repository. It is important to have the trustscores.py and trustscore_evaluation.py in the same folder as the .Rmd file to import the trust score functions that are in that Python file.
 
 #### Step 2: Open R Studio and run the following code chunks.
 
