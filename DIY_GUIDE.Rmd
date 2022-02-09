@@ -17,7 +17,7 @@ While the initial trust score code was done in Python 2.7, it was updated to be 
 
 
 #### Step 1: Gather materials.
-Download the entire repository. It is important to have the trustscores.py and trustscore_evaluation.py in the same folder as the .Rmd file to import the trust score functions that are in that Python file.
+Download the entire repository. It is important to have the trustscore_annotateds.py and trustscore_evaluation.py in the same folder as the .Rmd file to import the trust score functions that are in that Python file.
 
 #### Step 2: Open R Studio and run the following code chunks.
 
@@ -69,8 +69,12 @@ reticulate::py_install("pandas")
 
 # import required Python packages
 import numpy as np
-import trustscore # have trustscore.py file in the same folder as 
-                  # the .Rmd file to import it
+# import trustscore # have trustscore.py file in the same folder as 
+#                   # the .Rmd file to import it. ORIGINAL trustscores.py file.
+import trustscore_annotated # have trustscore_annotated.py file in the same folder as 
+                  # the .Rmd file to import it. This is the trustscores file from Github
+                  # with my annotations and additional print statements.
+                  # The actual mechanisms calculating the trustscores are unedited.
 import trustscore_evaluation  # haave trustscore_evaluation.py in the 
                               # same folder as the .Rmd file to import it
 import numpy as np
@@ -177,7 +181,7 @@ You may get a "failed to converge" and "max number of iterations reached" warnin
 # Python code chunk
 
 # Initialize trust score.
-trust_model = trustscore.TrustScore()
+trust_model = trustscore_annotated.TrustScore()
 
 # convert the inputs into numpy arrays
 X_penguins = X_penguins.to_numpy()

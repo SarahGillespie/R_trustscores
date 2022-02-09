@@ -146,8 +146,8 @@ class TrustScore:
     The trust score, which is ratio of distance to closest class that was not
     the predicted class to the distance to the predicted class.
     """
-    
-    # the X argument should be a numpy array
+
+    # the X argument should be a numpy array.
     # the y argument is not specified here. The example code had y_pred be a numpy array.
     #    - Sarah Gillespie
     
@@ -162,7 +162,7 @@ class TrustScore:
         )
         return d_to_closest_not_pred / (d_to_pred + self.min_dist)
 
-
+       
 class KNNConfidence:
     """Baseline which uses disagreement to kNN classifier.
   """
