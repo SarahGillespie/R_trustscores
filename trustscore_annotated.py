@@ -84,14 +84,17 @@ class TrustScore:
     X: an array of sample points.
     y: corresponding labels. # as a nupy array! - Sarah Gillespie
     """
-    
-    # the y MUST be a numpy array. Convert it with np.array(y_penguins)
-    #    - Sarah Gillespie
-    
-    
-    # this function to uses numpy arrays as its inputted data structure for both the x and y inputs.
-    # the outputted object is also a numpy array.
-    #    - Sarah Gillespie
+        print("Fitting the trustscores model...")
+        # Inform the user about progress.
+        #    - Sarah Gillespie
+        
+        # the y MUST be a numpy array. Convert it with np.array(y_penguins)
+        #    - Sarah Gillespie
+        
+        
+        # this function to uses numpy arrays as its inputted data structure for both the x and y inputs.
+        # the outputted object is also a numpy array.
+        #    - Sarah Gillespie
         
         self.n_labels = np.max(y) + 1
         
@@ -132,6 +135,11 @@ class TrustScore:
                     "Filtered too much or missing examples from a label! Please lower "
                     "alpha or check data."
                 )
+
+
+        print("Completed model fitting.")
+        # Inform the user about progress.
+        #    - Sarah Gillespie
 
     def get_score(self, X: np.array, y_pred: np.array):
         """Compute the trust scores.
