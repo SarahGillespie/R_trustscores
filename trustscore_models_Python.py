@@ -1,12 +1,9 @@
 
-import trustscore
-import trustscore_evaluation
-import numpy as np
-import matplotlib.pyplot as plt
-import keras
-
 # Import the dataset
 from sklearn import datasets
+import trustscore
+import trustscore_evaluation
+
 wine = datasets.load_wine()
 X_wine = wine.data
 y_wine = wine.target

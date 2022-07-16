@@ -10,3 +10,13 @@ __pycache__/trustscore.cpython-36.pyc
 .Rhistory
 .Rhistory
 lab_SDS_293_ethics_unit_R_and_python.html
+*.xml
+*.xml
+*.iml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/R_trustscores.iml
+.idea/vcs.xml
+*.xml
+*.iml
